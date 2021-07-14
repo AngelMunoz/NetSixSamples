@@ -8,20 +8,23 @@ type Todo =
     { id: int
       title: string
       isDone: bool }
-
 let mutable private todos = []
 
-let getTodos =
-    let getTodos () = todos |> List.toSeq
-    Func<Todo seq>(getTodos)
+type ITodoService = 
+    abstract GetTodos: unit -> Todo seq
 
-let addTodo =
-    let addTodo (todo: Todo) =
-        todos <- todo :: todos
-        true
+let TodoService = { new ITodoService with
+                        member this.GetTodos(): seq<Todo> = 
+                            todos |> List.toSeq }
+let private getTodos =
+    Func<ITodoService, Todo seq>
+        (fun (todos: ITodoService) -> todos.GetTodos())
 
-    Func<Todo, bool>(addTodo)
-
+let private addTodo =
+    Func<Todo, bool>
+        (fun todo ->
+            todos <- todo :: todos
+            true)
 
 let registerRoutes (app: WebApplication) =
     app.MapGet("/todos", getTodos) |> ignore
