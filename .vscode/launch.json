@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Newish C#",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build:cs",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Newish/bin/Debug/net6.0/Newish.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Newish",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Newish F#",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build:fs",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Newishfs/bin/Debug/net6.0/Newishfs.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Newishfs",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}
